@@ -11,7 +11,6 @@ const Navbar = () => {
     if(loading){
         return <Loading/>
     }
-    console.log(user);
     
   return (
     <div className="text-gray-600 ">

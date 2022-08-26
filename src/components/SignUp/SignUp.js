@@ -65,7 +65,6 @@ const SignUp = () => {
             className="mt-3 border-2 py-3 px-3 w-full min-w-[350px] block rounded-md outline-orange-500"
             type="text"
             name="name"
-            id="name"
             placeholder="Name"
           />
           <input
@@ -73,7 +72,6 @@ const SignUp = () => {
             className="mt-3 border-2 py-3 px-3 w-full min-w-[350px] block rounded-md outline-orange-500"
             type="email"
             name="email"
-            id="email"
             placeholder="Email"
           />
           <input
@@ -81,7 +79,6 @@ const SignUp = () => {
             className="mt-3 border-2 py-3 px-3 w-full min-w-[350px] block rounded-md outline-orange-500"
             type="password"
             name="password"
-            id="password"
             placeholder="Password"
           />
           <input
@@ -89,7 +86,6 @@ const SignUp = () => {
             className="mt-3 border-2 py-3 px-3 w-full min-w-[350px] block rounded-md outline-orange-500"
             type="password"
             name="confirmPassword"
-            id="confirmPassword"
             placeholder="Confirm password"
           />
           <input
