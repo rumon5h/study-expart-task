@@ -1,9 +1,10 @@
 import React from 'react';
+import Ask from '../Ask/Ask';
 
 const Home = () => {
     return (
         <div>
-            <h1>This is home page.</h1>
+            <Ask/>
         </div>
     );
 };

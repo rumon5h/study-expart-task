@@ -16,18 +16,18 @@ const LogIn = () => {
   ] = useSignInWithEmailAndPassword(auth);
 
   useEffect(() => {
-    if (user) {
+    if (user || gUser) {
       navigate("/");
     }
-  }, [user, navigate]);
+  }, [user, navigate, gUser]);
 
-  if (loading) {
+  if (loading || gLoading) {
     return <Loading />;
   }
   console.log(user);
 
-  if (error) {
-    toast.error(error.message, { id: "user-error" });
+  if (error || gError) {
+    toast.error(error.message || gError.message , { id: "user-error" });
   }
 
   const handleSignIn = (event) => {
