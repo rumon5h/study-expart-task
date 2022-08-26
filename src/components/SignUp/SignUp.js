@@ -1,33 +1,64 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from "react-firebase-hooks/auth";
 import auth from "../../firebase.inti";
 import toast from "react-hot-toast";
 import Loading from "../Loading/Loading";
 
 const SignUp = () => {
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [
+    signInWithGoogle, 
+    gUser, 
+    gLoading, 
+    gError
+] = useSignInWithGoogle(auth);
+
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, uError] = useUpdateProfile(auth);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) {
+    if (user || gUser) {
       navigate("/");
     }
-  }, [user, navigate]);
+  }, [user, navigate, gUser]);
 
-  if (loading) {
+  if (loading || gLoading || updating) {
     return <Loading/>
   }
   console.log(user);
 
-  if (error) {
-    toast.error(error.message, { id: "user-error" });
+  if (error || uError || gError) {
+    toast.error(error.message || uError.message || gError.message , { id: "user-error" });
+  }
+
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+
+    const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const confirmPassword = event.target.confirmPassword.value;
+
+    if(password !== confirmPassword){
+        return toast.error("Password did not match", {id: 'pass-error'})
+    }
+    await createUserWithEmailAndPassword(email, password);
+    await updateProfile({displayName: name});
   }
 
   return (
     <div className="bg-white p-5 flex justify-center items-center h-[90vh] m-5">
       <div className=" border-orange-500 shadow-orange-300 rounded-md border-2 shadow-lg p-10">
-        <form className="" action="">
+        <form onSubmit={handleSignUp}>
           <h1 className="text-2xl text-center mb-5">Create New Account!</h1>
           <input
             required
@@ -57,7 +88,7 @@ const SignUp = () => {
             required
             className="mt-3 border-2 py-3 px-3 w-full min-w-[350px] block rounded-md outline-orange-500"
             type="password"
-            name="password"
+            name="confirmPassword"
             id="confirmPassword"
             placeholder="Confirm password"
           />
