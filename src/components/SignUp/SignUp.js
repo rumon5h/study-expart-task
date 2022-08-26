@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import auth from "../../firebase.inti";
 import toast from "react-hot-toast";
+import Loading from "../Loading/Loading";
 
 const SignUp = () => {
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
@@ -15,7 +16,7 @@ const SignUp = () => {
   }, [user, navigate]);
 
   if (loading) {
-    return "Loading...";
+    return <Loading/>
   }
   console.log(user);
 
