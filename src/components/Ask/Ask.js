@@ -13,7 +13,7 @@ const Ask = () => {
           className="mt-3 md:max-w-[450px] border-2 py-3 px-3 w-full md:min-w-[350px] block rounded-md outline-orange-500"
           name="question"
           cols="30"
-          rows="10"
+          rows="8"
           placeholder="Type your question!"
         ></textarea>
         <button
